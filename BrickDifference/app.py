@@ -1,7 +1,7 @@
 import os
 import platform
 from enum import Enum
-from BrickDifference.Model_Functions import *
+from BrickDifference.modelFunctions import *
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
