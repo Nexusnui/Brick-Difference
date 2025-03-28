@@ -24,7 +24,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import pyqtSignal
 
-app_version = "0.1"
+app_version = "0.1.0"
 
 if platform.system() == "Windows":
     try:
