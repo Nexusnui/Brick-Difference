@@ -265,28 +265,26 @@ def get_part_difference(partlist_a: Partlist, partlist_b: Partlist):
             diff_list.partlist[part] = partlist_a.partlist[part]
     return diff_list, comm_list
 
+
 if __name__ == "__main__":
-    testfile_a = "C:\\Users\\Hageta\\PycharmProjects\\BrickDifference_Pre\\TestmodelA.ldr"
-    testfile_b = "C:\\Users\\Hageta\\PycharmProjects\\BrickDifference_Pre\\TestmodelB.ldr"
-    #"""
+    testfile_a = "Path\\To\\Your\\Testfile_A.ldr"
+    testfile_b = "Path\\To\\Your\\Testfile_B.ldr"
+
     file_tree_a = LdrawFileTree(testfile_a)
     file_tree_b = LdrawFileTree(testfile_b)
-    part_diff, part_comm = get_part_difference(list(file_tree_a.filetree.values())[0].get_total_partlist(), list(file_tree_b.filetree.values())[0].get_total_partlist())
+    part_diff, part_comm = get_part_difference(
+        list(file_tree_a.filetree.values())[0].get_total_partlist(),
+        list(file_tree_b.filetree.values())[0].get_total_partlist())
 
-    #rint(part_diff)
-    #print(part_comm)
     for line in part_comm.generate_ldraw_model("diff_partlist", 85, 25, 25):
         print(line.strip("\n"))
-    #"""
-    """
+
     file_diff, file_comm = get_difference_model(file_tree_b, file_tree_a)
 
     for sub in file_diff.values():
         sub.content.sort()
         for lline in sub.get_ldraw_lines():
             print(lline.strip("\n"))
-    #"""
 
-
-    #total = list(file_tree_a.filetree.values())[0].get_total_partlist()
-    #print(total)
+    total_a = list(file_tree_a.filetree.values())[0].get_total_partlist()
+    print(total_a)
