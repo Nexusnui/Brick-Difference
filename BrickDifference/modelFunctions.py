@@ -179,13 +179,18 @@ class LdrawFileTree:
         self.filetree = {}
         with open(filepath, "r", encoding="utf-8") as file:
             submodel_content = []
+            ends_with_nofile = False
             for line in file:
                 submodel_content.append(line)
                 if line.startswith("0 NOFILE"):
+                    ends_with_nofile = True
                     if len(submodel_content) > 0:
                         submodel = LDrawFile(submodel_content)
                         self.filetree[submodel.filename.lower()] = submodel
                         submodel_content = []
+            if not ends_with_nofile:
+                submodel = LDrawFile(submodel_content)
+                self.filetree[submodel.filename.lower()] = submodel
         for fileid in self.filetree:
             file: LDrawFile = self.filetree[fileid]
             for submodel in file.submodels:
@@ -233,9 +238,6 @@ def get_difference_model(model_a: LdrawFileTree, model_b: LdrawFileTree):
                             diff_file.content.append(new_line)
             common_model[file_id] = comm_file
             if len(diff_file.content) > 0:
-                difference_model[file_id] = diff_file
-            else:
-                diff_file.content = file_a.content
                 difference_model[file_id] = diff_file
         else:
             diff_file.content = model_a.filetree[file_id].content
