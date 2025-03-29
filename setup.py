@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='BrickDifference',
-    version='0.1.0',
+    version='0.1.1',
     description='This is a graphical Python program for calculating the difference between two LDraw files.',
     url='https://github.com/Nexusnui/Brick-Difference',
     author='Nexusnui',
