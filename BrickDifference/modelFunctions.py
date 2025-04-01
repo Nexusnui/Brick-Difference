@@ -218,7 +218,7 @@ def get_difference_model(model_a: LdrawFileTree, model_b: LdrawFileTree):
                         diff_file.content.append(line)
                     else:
                         sub_id = " ".join(line.strip("\n").split(" ")[14:])
-                        if sub_id not in model_b.filetree or model_a.filetree[sub_id] == model_b.filetree[sub_id]:
+                        if sub_id not in model_b.filetree:
                             diff_file.content.append(line)
                         else:
                             new_sub_header = model_a.filetree[sub_id].header.copy()
