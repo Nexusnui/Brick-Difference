@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools >= 84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Brick-Difference"
+authors = [{name = "Nexusnui", email = "developer@nexusnui.de"}]
+description = "This is a graphical Python program for calculating the difference between two LDraw files."
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">= 3.12"
+license = "GPL-3.0 AND MIT"
+license-files =["LICENSE"]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: End Users/Desktop',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.12',
+    'Natural Language :: English',
+    'Topic :: File Formats',
+]
+# For Snapshots change dev status to : 'Development Status :: 4 - Beta'
+dependencies = [
+  "PyQt6==6.12.1",
+]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/Nexusnui/Brick-Difference.git"
+Issues = "https://github.com/Nexusnui/Brick-Difference/issues"
+
+[project.gui-scripts]
+Brick-Difference = "BrickDifference.app:run"
+
+[tool.setuptools.dynamic]
+version = {attr = "BrickDifference._version.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["BrickDifference*"]
+
+[tool.setuptools.package-data]
+"BrickDifference.icons" = [
+    'BrickDifference_Icon.ico',
+    'BrickDifference_Icon_*.png',
+]
