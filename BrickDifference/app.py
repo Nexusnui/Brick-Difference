@@ -3,6 +3,7 @@ import platform
 from enum import Enum
 from BrickDifference.modelFunctions import *
 from BrickDifference import __version__
+from BrickDifference.ui_elements.updateDialog import UpdateDialog
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
@@ -125,6 +126,10 @@ class MainWindow(QMainWindow):
         self.generate_button = QPushButton("Generate Difference Files")
         self.generate_button.clicked.connect(self.generate_files)
         control_layout.addRow(self.generate_button)
+
+    # Setup Menubar
+        open_settings_action = self.menuBar().addAction("Updates")
+        open_settings_action.triggered.connect(self.open_updates)
 
     # Add Elements to Main Layout
 
@@ -273,6 +278,11 @@ class MainWindow(QMainWindow):
                 save_model(out_only_b, filepath_only_b)
                 saved_files.append(f"{filepath_only_b}\n")
         QMessageBox.information(self, "Files Saved", f"Saved the following files:\n{"".join(saved_files)}")
+
+
+    def open_updates(self):
+        upate_dialog = UpdateDialog(self)
+        upate_dialog.exec()
 
 
 class FileWidget(QWidget):
