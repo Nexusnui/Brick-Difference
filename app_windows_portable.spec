@@ -7,6 +7,7 @@ a = Analysis(
     binaries=[],
     datas=[('BrickDifference\\icons\BrickDifference_Icon.ico','icons'),
            ('LICENSE','.')
+           ('build-resources\\windows_installer\\install_portable','BrickDifference')
            ],
     hiddenimports=[],
     hookspath=[],
