@@ -1,2 +1,2 @@
-__version__ = "0.1.0"
+from BrickDifference._version import __version__
 __author__ = 'Nexusnui'

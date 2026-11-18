@@ -2,6 +2,7 @@ import os
 import platform
 from enum import Enum
 from BrickDifference.modelFunctions import *
+from BrickDifference import __version__
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
@@ -24,13 +25,11 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import pyqtSignal
 
-app_version = "0.1.2"
-
 if platform.system() == "Windows":
     try:
         from ctypes import windll  # Only exists on Windows.
 
-        myappid = f"nexusnui.brickdifference.{app_version}"
+        myappid = f"nexusnui.brickdifference.{__version__}"
         windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     except ImportError:
         pass
@@ -42,7 +41,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle(f"Brick Difference {app_version}")
+        self.setWindowTitle(f"Brick Difference {__version__}")
         main_layout = QHBoxLayout()
         sub_layout = QVBoxLayout()
 
