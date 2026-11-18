@@ -1,0 +1,34 @@
+from importlib import resources
+import platform
+from BrickDifference import __version__
+from PyQt6.QtWidgets import (
+    QDialog,
+    QVBoxLayout,
+    QPlainTextEdit,
+    QLayout
+)
+
+
+class AboutPage(QDialog):
+    def __init__(self, parent= None):
+        super().__init__(parent)
+        self.setWindowTitle("About Brick Difference")
+        main_layout = QVBoxLayout()
+
+        install_path = __file__.split('ui_elements')[0]
+
+        install_info = resources.read_text("BrickDifference", "install_info")
+        self.info_widget: QPlainTextEdit = QPlainTextEdit(
+            f"Brick Difference Version: {__version__}\n"
+            f"Installation Method: {install_info}\n"
+            f"Python Version: {platform.python_version()}\n"
+            f"Platform: {platform.platform()}\n"
+            f"Installation Path:\n'{install_path}'"
+        )
+        self.info_widget.setReadOnly(True)
+        font_size = self.info_widget.fontMetrics().lineSpacing()
+        self.info_widget.setFixedHeight(font_size*7)
+        self.info_widget.setMinimumWidth(font_size * 30)
+        main_layout.addWidget(self.info_widget)
+        self.setLayout(main_layout)
+        main_layout.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)

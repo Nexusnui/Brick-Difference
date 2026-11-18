@@ -1,8 +1,10 @@
 import os
 import platform
 from enum import Enum
+
 from BrickDifference.modelFunctions import *
 from BrickDifference import __version__
+from BrickDifference.ui_elements.aboutPage import AboutPage
 from BrickDifference.ui_elements.updateDialog import UpdateDialog
 
 from PyQt6.QtCore import Qt
@@ -128,6 +130,8 @@ class MainWindow(QMainWindow):
         control_layout.addRow(self.generate_button)
 
     # Setup Menubar
+        open_about_page_action = self.menuBar().addAction("About")
+        open_about_page_action.triggered.connect(self.open_about_page)
         open_settings_action = self.menuBar().addAction("Updates")
         open_settings_action.triggered.connect(self.open_updates)
 
@@ -283,6 +287,10 @@ class MainWindow(QMainWindow):
     def open_updates(self):
         upate_dialog = UpdateDialog(self)
         upate_dialog.exec()
+
+    def open_about_page(self):
+        about_dialog = AboutPage(self)
+        about_dialog.exec()
 
 
 class FileWidget(QWidget):
