@@ -1,4 +1,5 @@
-import os
+import sys
+import traceback
 import platform
 from enum import Enum
 
@@ -6,6 +7,7 @@ from BrickDifference.modelFunctions import *
 from BrickDifference import __version__
 from BrickDifference.ui_elements.aboutPage import AboutPage
 from BrickDifference.ui_elements.updateDialog import UpdateDialog
+from BrickDifference.ui_elements.exceptiondialog import ExceptionDialog
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QIcon
@@ -36,6 +38,23 @@ if platform.system() == "Windows":
         windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     except ImportError:
         pass
+
+sys._excepthook = sys.excepthook
+
+
+def exception_hook(exctype, value, _traceback):
+    exception_info = ExceptionDialog(
+        clipboard=None,
+        title="Application Crashed",
+        message="Application crashed due to the following Exception:",
+        traceback_str="".join(traceback.format_tb(_traceback))
+    )
+    sys._excepthook(exctype, value, _traceback)
+    exception_info.exec()
+    sys.exit(1)
+
+
+sys.excepthook = exception_hook
 
 basedir = os.path.dirname(__file__)
 
