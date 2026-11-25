@@ -15,7 +15,7 @@ class AboutPage(QDialog):
         self.setWindowTitle("About Brick Difference")
         main_layout = QVBoxLayout()
 
-        install_path = __file__.split('ui_elements')[0]
+        install_path = resources.files("BrickDifference")
 
         install_info = resources.read_text("BrickDifference", "install_info")
         self.info_widget: QPlainTextEdit = QPlainTextEdit(
